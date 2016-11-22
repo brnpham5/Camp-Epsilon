@@ -1,0 +1,16 @@
+import DataFile_Handler
+
+file = DataFile_Handler.DataFile_Handler("ACT1.txt")
+print (file.keyword_Handler(0))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))
+print (file.keyword_Handler(-1))

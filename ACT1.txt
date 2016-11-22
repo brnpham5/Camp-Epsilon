@@ -1,0 +1,120 @@
+MUS_ **Backgrond music filepath**
+DSC_ ACT 1
+BKG_ **Background image filepath**
+SFX_ **Static soundbyte filepath**
+NPC_ Hello, can anyone--
+SFX_ **Static soundbyte filepath**
+NPC_ Anyone? Please, respond if you can here me...
+CHC_11_Who's this?
+CHC_11_Calm down, I'm here.
+ENC_
+NPC_ Sorry. Right...
+DSC_ After a brief pause you hear the sound of a deep, calming breath.
+NPC_ My name is Jordan. I'm at Camp Epsilon and... well...
+CHC_17_ What the hell is Camp Epsilon?
+CHC_31_ Well what? Is everything ok?
+ENC_
+NPC_ It's a summer camp in the Sierras, but that's not really important right now!
+CHC_21_ What is important then?
+CHC_21_ Hey, calm down, you're the one who mentioned it...
+ENC_
+NPC_ I can't find the campers! I was on duty... It's my watch and..
+NPC_ I need help. Who are you? Are you like a park ranger or something?
+CHC_26_ I'm "something" all right...
+CHC_28_ Ranger? There is nobody else out here for miles and miles.
+ENC_
+BRN_0
+JMP_29
+BRN_1
+NPC_ I'm not sure what to do then. I just assumed a ranger or someone would be able to help...
+NPC_ The cabins are all empty. It's so quiet.
+JMP_42
+NPC_ No, everyone is gone!
+NPC_ The entire camp has disappeared.
+CHC_37_ Maybe it was an axe murderer?
+CHC_39_ Think they were abducted by aliens?
+ENC_
+BRN_0
+JMP_40
+BRN_1
+NPC_ That is beyond not funny!
+SFX_ **static sound clip file path**
+NPC_ I was making the nightly rounds, checking cabins.
+NPC_ I noticed Sequoia Cabins door was opened. When I looked closer...
+NPC_ The hinges were busted. I looked inside and everyone was gone.
+CHC_48_ Why don't you try to find an adult or cammp coordinator?
+CHC_49_ I'm sure someone is jsut playing a practical joke. People are hilarious!
+ENC_
+NPC_ He's gone, too. I'm telling you. Every. One. Is. Gone.
+NPC_ No, it's... This place feels... empty...
+DSC_ Slow, deep breathing comes through the radio.
+SFX_ **static sound clip file path**
+NPC_ The radio static. It makes it worse. It's creepy.
+CHC_56_ Like Twilight Zone creepy?
+CHC_58_ Like something lurking in the woods?
+ENC_
+BRN_0
+JMP_59
+BRN_1
+NPC_ You really have a dark sense of humor, don't you?
+NPC_ It's probably a good thing. I'm on the verge of absolutely losing it right now.
+NPC_ Thanks for talking to me, by the way. Whoever you are.
+CHC_65_ You're welcome. Glad to help.
+CHC_65_ My agenda for the night isn't exactly chocked full of meetings.
+ENC_
+NPC_ You didn't have to help me, but you did. 
+NPC_ That shows kindness and I...
+SFX_ **Static sound**
+NPC_ I think I heard something just outside the cabin!
+NPC_ I can't see anything... What was that?
+CHC_73_ Probably just the wind.
+CHC_73_ Relax, don't forget to breathe.
+ENC_
+NPC_ I think I'm ok. You're right. No big deal.
+NPC_ I'm glad I'm not alone, but it's so dark.
+NPC_ There's gotta be a flashlight around here somewhere...
+CHC_79_ Check the bags of the other campers.
+CHC_81_ Maybe check the coordinator's cabin?
+ENC_
+BRN_0
+JMP_83
+BRN_1
+JMP_102
+NPC_ Don't you think someone would mind?
+CHC_87_ If they're even alive, right?
+CHC_89_ I think it's clear how completely alone you are right now...
+ENC_
+BRN_0
+JMP_90
+BRN_1
+NPC_ Don't say stuff like that!
+NPC_ There's got to be a perfectly normal...
+NPC_ ... reasonable...
+DSC_ Nearly a minute passed in silence
+CHC_97_ Hello? Are you ok?
+CHC_97_ It's rude to just trail off like that...
+ENC_
+NPC_ I'm sorry... I...
+NPC_ I thought I saw... something.
+NPC_ Outside the window...
+NPC_ Something's out there...
+ENA_0
+NPC_ Coordinator's cabin. Right.
+NPC_ What if I can't find anyone else?
+CHC_107_ I'll come running, Indiana Jones, style to rescue you!
+CHC_109_ You'll just have to find a way to get out of there on your own.
+ENC_
+BRN_0
+JMP_110_
+BRN_1
+NPC_ I'm not sure that's quite as comforting as you seem to think it is...
+NPC_ Well, here I go. 
+NPC_ Wandering out into the woods.
+NPC_ Alone.
+NPC_ In the woods. At night.
+CHC_118_ You'll be ok. Just keep moving.
+CHC_118_ Some of my favorite movies involve being alone in the woods...
+ENC_
+NPC_ ...I...
+NPC_ ... I think I'm being followed.
+ENA_1
