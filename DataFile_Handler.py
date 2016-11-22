@@ -1,7 +1,7 @@
 import linecache
 import Choice
 
-class DataFile_Handler():
+class DataFile_Handler(object):
 	CurrentDataFile = "\0"
 	NextAct = 0
 	CurrentLine = -1
