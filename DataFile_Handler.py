@@ -1,8 +1,13 @@
 import linecache
 import Choice
 
+<<<<<<< HEAD
 class DataFile_Handler(object):
 	CurrentDataFile = "\0"
+=======
+class DataFile_Handler():
+	CurrentDataFile = ""
+>>>>>>> master
 	NextAct = 0
 	CurrentLine = -1
 
@@ -14,87 +19,73 @@ class DataFile_Handler(object):
 		self.NextAct = 0
 		self.CurrentLine = 0
 		
+		
 	def getCurrentAct(self):
 		return self.CurrentDataFile
 		
-	def keyword_Handler(self, lineNum):
-		if(int(lineNum) > -1):
-			self.CurrentLine = int(lineNum)
-			
+	def keyword_Handler(self):	
 		currLine = linecache.getline(self.CurrentDataFile, self.CurrentLine).split("_")
-		
-		if(currLine[0] == "DSC"):
-			return self.getDSC()
-		elif(currLine[0] == "NPC"):
-			return self.getNPC()
-		elif(currLine[0] == "CHC"):
-			return self.getCHC()
-		elif(currLine[0] == "SFX"):
-			return self.updateSFX()
-		elif(currLine[0] == "MUS"):
-			return self.updateMUS()
-		elif(currLine[0] == "BKG"):
-			return self.updateBKG()
-		elif(currLine[0] == "ENA"):
-			return self.endAct(currLine[1])
-		elif(currLine[0] == "ENC"):
-			self.updateLine()
-		elif(currLine[0] == "BRN"):
-			return self.updateNextAct()
-		elif(currLine[0] == "LIK"):
-			return self.updateLike()
-		elif(currLine[0] == "JMP"):
-			return self.jumpToLine(currLine[1])
-		else:
-			self.updateLine()
+		return currLine
 	
-	def jumpToLine(self, lineNum):
+	def setLineNumber(self, lineNum):
 		self.CurrentLine = lineNum
-		return self.keyword_Handler(self.CurrentLine)
 	
-	def getDSC(self):
-			DSC = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-			self.updateLine()
-			return DSC
-		
-	def getNPC(self):
-			NPC = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-			self.updateLine()
-			return NPC
-		
+	#deprecated due to change in design
+	#def getDSC(self):
+	#		DSC = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#		self.updateLine()
+	#		return DSC
+	
+	#deprecated due to change in design	
+	#def getNPC(self):
+	#		NPC = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#		self.updateLine()
+	#		return NPC
+	
+	#altered due to design change
 	def getCHC(self):
-		parsed1 = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.updateLine()
-		parsed2 = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.updateLine()
-		choices = Choice.Choice()
-		choices.setChoice(parsed1, parsed2)
-		return choices
-		
-	def updateSFX(self):
+	#	parsed1 = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	parsed2 = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	choices = Choice.Choice()
+	#	choices.setChoice(parsed1, parsed2)
+	#	return choices
 		parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+		self.updateLine()
+		parsed.append((linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_"))
 		self.updateLine()
 		return parsed
+
+	#deprecated due to change in design	
+	#def updateSFX(self):
+	#	parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	return parsed
 		
+	#deprecated due to change in design	
+	#def updateMUS(self):
+	#	parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	return parsed
+	
+	#deprecated due to change in design
+	#def updateBKG(self):
+	#	parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	return parsed
 		
-	def updateMUS(self):
-		parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.updateLine()
-		return parsed
+	#deprecated due to change in design
+	#def updateLike(self):
+	#	parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
+	#	self.updateLine()
+	#	#call the method to update player Like value
 		
-	def updateBKG(self):
-		parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.updateLine()
-		return parsed
-		
-	def updateLike(self):
-		parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.updateLine()
-		#callthe method to update player Like value
-		
-	def updateNextAct(self):
-		parsed = (linecache.getline(self.CurrentDataFile, self.CurrentLine)).split("_")
-		self.NextAct = self.NextAct + (int(parsed[1]))
+	def updateNextAct(self, changeInValue):
+		if(changeInValue == 0):
+			self.NextAct = self.NextAct - 1
+		else:
+			self.NextAct = self.NextAct + 1
 		self.updateLine()
 	
 	def endAct(self, version):
