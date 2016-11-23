@@ -1,7 +1,5 @@
 #Version 0.0.8
 from Tkinter import *
-import tkFont
-from PIL import ImageTk, Image
 from soundHandler import soundHandler
 #from UserFile_Handler import UserFile_Handler
 
