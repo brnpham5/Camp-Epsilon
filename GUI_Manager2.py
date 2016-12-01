@@ -19,17 +19,20 @@ class GUI_Manager2:
         ## Start Menu Frame
         self.start_frame = Frame(self.main_frame)
 
+        ## Gameplay Frame
+        self.game_frame = Frame(self.main_frame)
+
         ## Background frame
-        self.bkg_frame = ttk.Frame(self.main_frame)
+        self.bkg_frame = ttk.Frame(self.game_frame)
 
         ## Dialogue frame
-        self.dialog_frame = ttk.Frame(self.main_frame)          #Set dialog-frame for gameplay
+        self.dialog_frame = ttk.Frame(self.game_frame)          #Set dialog-frame for gameplay
         self.dialog_text = Text(self.dialog_frame)              #Text portion of dialog frame
         self.dialog_scroll = Scrollbar(self.dialog_frame)       #Scrollbar of dialog frame
         self.dialog_yview = 1                                   #yview of dialogue frame
         
         ## User Frame
-        self.user_frame = ttk.Frame(self.main_frame)            #Set-user frame for gameplay, user's choices and options will go into this frame
+        self.user_frame = ttk.Frame(self.game_frame)            #Set-user frame for gameplay, user's choices and options will go into this frame
         
         ## Main frame
         master.resizable(width = False, height = False)     #Make window not resizable 
@@ -64,7 +67,13 @@ class GUI_Manager2:
         #soundplayer.updateMusic(placeholder)               #play music on screen
     
     ## Display the game menu
-    def gameScreen(self):
+    def gameScreen(self, optionButton):
+        ## Game Frame Configuration
+        self.game_frame.config(height = self.mainFrameHeight, width = self.mainFrameWidth)
+
+        ## Set Font
+        buttonFont = tkFont.Font(size = 15)
+
         ## Background Frame Configuration
         self.bkg_frame.grid(row = 0, column = 0, rowspan = 2, sticky = 'nsew', padx = 10, pady = 10)    #Position the frame and add padding         
         self.bkg_frame.config(width = 450)                                                              #Set the width of the frame
@@ -80,9 +89,13 @@ class GUI_Manager2:
         ## User Frame Configuration
         self.user_frame.grid(row = 1, column = 1, sticky = 'nsew', padx = 10, pady = 10)                #Position the frame and add padding
         self.user_frame.config(height = 270, width = 450)                                               #Set height and width of the frame
-        self.user_frame.config(relief = RIDGE)                                                          #Style the border
+        self.user_frame.config(relief = RIDGE)  
+        
+        ## Option Button Configuration
+        optionButton.config(text = "Option", font = buttonFont)
+        optionButton.place(relx = 0.95, rely = 0.95)                                                        #Style the border
 
-        self.main_frame.pack()
+        self.game_frame.pack()
 
 
 
@@ -149,6 +162,19 @@ class GUI_Manager2:
         ## Display Cancel Button
         loadCancel_Button.config(text = "Cancel", font = buttonFont)
         loadCancel_Button.place(relx = 0.70, rely = 0.5)
+
+    def optionMenu(self):
+        buttonFont = tkFont.Font(size = 15)
+        self.options = Toplevel(self.main_frame ,height = 250, width = 300)
+        self.options.title("Option Menu")
+        toggleMUS = Button(self.options, text = "Toggle Music", command = (lambda:self.soundPlayer.toggleMusic()), font  = buttonFont)
+        toggleMUS.pack()
+        toggleSE = Button(self.options, text = "Toggle Sound Effects", command = (lambda:self.soundPlayer.toggleSFX()), font  = buttonFont)
+        toggleSE.pack()
+        closeOptions = Button(self.options, text = "Return to Game", command = (lambda:self.options.destroy()), font  = buttonFont)
+        closeOptions.pack()
+        startMenu = Button(self.options, text = "Return to Menu", command = (lambda:self.GameToStart(1)), font  = buttonFont)
+        startMenu.pack()
 
     ## Print the dialogue
     def print_dialogue(self, message):

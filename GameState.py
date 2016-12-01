@@ -58,10 +58,6 @@ class GameState(Char):
         message = Tkinter.Message(self.tk, text = "Click anywhere to start")
         message.place(bordermode = Tkinter.OUTSIDE, height = self.GUI_Manager.mainFrameHeight, width = self.GUI_Manager.mainFrameWidth)
 
-    ## TESTER: Print test for pieces that are WIPs
-    def tester_prompt(self):
-        print("TEST")
-
     ## TESTER: Speed up timer with each click
     def click_Handler(self, event):
         self.StateMachine_Forward()
@@ -190,11 +186,43 @@ class GameState(Char):
     ## Display the gamescreen.
     def display_GameScreen(self):
         print("Game Screen")
+        ##Option Menu Toggle
+        self.optionOn = False
+
+        ## Create Option Menu button
+        self.optionButton = Tkinter.Button(self.GUI_Manager.game_frame, command = lambda: self.OptionMenu_toggle())
+
         ## Call GUI_Manager to display screen
-        self.GUI_Manager.gameScreen()
+        self.GUI_Manager.gameScreen(self.optionButton)
 
         ## TESTER: Click to progress game
         self.tk.bind("<Button-1>", self.click_Handler)
+
+    def OptionMenu_toggle(self):
+        if(self.optionOn) == False:
+            self.optionOn = True
+            self.GUI_Manager.display_optionMenu()
+        else:
+            self.optionOn = False
+            self.GUI_Manager.hide_optionMenu()
+            self.GUI_Manager.
+
+
+    def OptionMenu_toggleMus(self):
+        pass
+
+    def OptionMenu_toggleSFX(self):
+        pass
+
+    def OptionMenu_close(self):
+        pass
+        
+    def OptionMenu_returnToStart(self):
+        pass
+
+    def hide_OptionMenu(self):
+        pass
+
 
     ## DataFile_Handler call
     def DataFile_getKey(self):
@@ -373,9 +401,3 @@ class GameState(Char):
 
 if __name__ == '__main__':
     game = GameState()
-    #for i in range(0, 20):
-    #    startTime = clock()
-    #    timeInterval = 0
-    #    while(startTime + timeInterval > clock()):
-    #        pass
-    #    game.execute()
