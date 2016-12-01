@@ -1,4 +1,4 @@
-#Version 0.0.9
+#Version 0.1.0
 from Tkinter import *
 import tkFont
 import ttk
@@ -13,8 +13,6 @@ class GUI_Manager2:
         ## Declarations
         self.main_frame = ttk.Frame(master)                 #Set main frame, the other three smaller frames will go inside the main frame
         self.root = master                                  #Save tk object to loal var 
-        self.mainFrameWidth = 1000                          #Width of the main window
-        self.mainFrameHeight = 600                          #Height of the main window
 
         ## Start Menu Frame
         self.start_frame = Frame(self.main_frame)
@@ -34,31 +32,40 @@ class GUI_Manager2:
         ## Main frame
         master.resizable(width = False, height = False)     #Make window not resizable 
         self.main_frame.pack()                              #Pack the main frame into place
-        self.main_frame.config(height = self.mainFrameHeight, width = self.mainFrameWidth)  #Set the height and width of the main frame
+        self.main_frame.config(height = 600, width = 1000)  #Set the height and width of the main frame
         self.main_frame.config(relief = RIDGE)              #Style the border
         self.main_frame.config(padding = (15, 15))          #Add padding to main frame
         
 
     ##Display the start menu    
-    def startMenu(self, title, buttonNewGame, buttonContinue, buttonExit):
-        ## Font Setup
-        buttonFont = tkFont.Font(size = 24)                 #Create custom font for buttons
-        titleFont = tkFont.Font(size = 30)                  #Create custom font for buttons
+    def startMenu(self, title, buttonNewGame, buttonContinue, buttonExit, menuBackground):
+        self.bkg_canvas = Canvas(self.start_frame, width = 1000, height = 600)      #Set canvas for background
+        self.bkg_canvas.pack(expand = YES, fill = BOTH, side = LEFT)        #Pack canvas     
+        self.bkg = PhotoImage(file = menuBackground)                            #Set background file
+        self.bkg_canvas.create_image(0,0, image = self.bkg, anchor = NW)
+        
+        style = ttk.Style()
+        style.configure('TButton', background = 'black', foreground = 'black', font = ('Times New Roman', 24, 'bold'))
+        style.map('TButton', foreground = [('pressed', 'red'),
+                                         ('disabled', 'grey')])
 
+        ## Font Setup
+        titleFont = tkFont.Font(size = 30)                  #Create custom font for buttons
+        
         ## Title
         title.config(text = "Camp Epsilon", font = titleFont)
-        title.place(bordermode = OUTSIDE, height = 90, width = 300, relx = 0.375, rely = .007)                           #set label in place and set dimensions
+        title.pack(bordermode = OUTSIDE, height = 90, width = 300, relx = 0.375, rely = .007)                           #set label in place and set dimensions
 
         ## New Game Button
-        buttonNewGame.config(text = "New Game", font = buttonFont)        #created button for start screen 
+        buttonNewGame.config(style = 'TButton', text = "New Game", cursor ='pirate')        #created button for start screen 
         buttonNewGame.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .20)                     #Set button in place, set dimensions
 
         ## Load Game Button
-        buttonContinue.config(text = "Continue Game", font = buttonFont)     #create button for load screen
-        buttonContinue.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .30)                      #set button in place, set dimensions
+        buttonContinue.config(style = 'TButton', text = "Continue Game", cursor ='pirate')     #create button for load screen
+        buttonContinue.place(bordermode = OUTSIDE, height = 0, width = 250, relx = 0.40, rely = .30)                      #set button in place, set dimensions
 
         ## Exit Game Button
-        buttonExit.config(text = "Exit Game", font = buttonFont)                                          #create button for game exit
+        buttonExit.config(style = 'TButton', text = "Exit Game", cursor ='pirate')                                          #create button for game exit
         buttonExit.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .40)                      #set button in place, set dimensions 
 
         #soundplayer.updateMusic(placeholder)               #play music on screen
@@ -88,8 +95,10 @@ class GUI_Manager2:
 
     #Method that creates popup window for file name entry. Changes start screen to game screen
     def newGame(self, entry_frame, instruction, entryBox, buttonConfirm, buttonReturn):
-        ## Set Font
-        buttonFont = tkFont.Font(size = 15)                             #create custom font for buttons
+        style = ttk.Style()
+        style.configure('TButton', background = 'black', foreground = 'black', font = ('Times New Roman', 15, 'bold'))
+        style.map('TButton', foreground = [('pressed', 'red'),
+                                         ('disabled', 'grey')])
 
         ## Entry Toplevel window
         entry_frame.config(height = self.mainFrameHeight, width = self.mainFrameWidth)      #Overlay frame on top of main_frame                              #Make window not resizable
@@ -100,11 +109,11 @@ class GUI_Manager2:
         entryBox.place(relx = 0.42, rely = 0.45)                                      #place entry in frame
 
         ## Confirm button
-        buttonConfirm.config(text = "Ok", font  = buttonFont)                   #create button for player
+        buttonConfirm.config(style = 'TButton', text = "Ok", cursor = 'pirate')                   #create button for player
         buttonConfirm.place(relx = 0.42, rely = 0.5)                                    #Set buttons
 
         ## Return button
-        buttonReturn.config(text = "Return to Menu", font  = buttonFont)    #create button for returning to start screen
+        buttonReturn.config(tyle = 'TButton', text = "Return to Menu", cursor = 'pirate')    #create button for returning to start screen
         buttonReturn.place(relx = 0.48, rely = 0.5)                                 #place button to popup window
 
         entry_frame.pack()
@@ -128,32 +137,35 @@ class GUI_Manager2:
         backButton.pack()
 
     def loadChoice(self, load_topLevel, nameLabel, loadConfirm_Button, loadDelete_Button, loadCancel_Button):
+        style = ttk.Style()
+        style.configure('TButton', background = 'black', foreground = 'black', font = ('Times New Roman', 15, 'bold'))
+        style.map('TButton', foreground = [('pressed', 'red'),
+                                         ('disabled', 'grey')])
+
         ##Overlay load_topLevel
         load_topLevel.config(height = 250, width = 300)
         load_topLevel.resizable(height = False, width = False)
-        ## Font Setup
-        buttonFont = tkFont.Font(size = 15)
 
         ## Display Labels
         nameLabel.config()
         nameLabel.place(relx = 0.25, rely = 0.35)
 
         ## Display Confirm Button
-        loadConfirm_Button.config(text = "Confirm", font  = buttonFont)
+        loadConfirm_Button.config(style = 'TButton', text = "Confirm")
         loadConfirm_Button.place(relx = 0.1, rely = 0.5) 
 
         ## Display Delete Button
-        loadDelete_Button.config(text = "Delete", font = buttonFont)
+        loadDelete_Button.config(style = 'TButton', text = "Delete")
         loadDelete_Button.place(relx = 0.40, rely = 0.5)
 
         ## Display Cancel Button
-        loadCancel_Button.config(text = "Cancel", font = buttonFont)
+        loadCancel_Button.config(style = 'TButton', text = "Cancel")
         loadCancel_Button.place(relx = 0.70, rely = 0.5)
 
     ## Print the dialogue
     def print_dialogue(self, message):
         ## Set Font
-        DSCfont = tkFont.Font(size = 15)
+        DSCfont = tkFont.Font(font = ('Times New Roman', 15))
 
         ## Print to dialogue frame by temporarily enabling then disabling text, update yview
         self.dialog_text.config(state = NORMAL)
