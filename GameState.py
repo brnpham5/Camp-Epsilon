@@ -25,6 +25,11 @@ class GameState(Char):
         ## Set first state to Transition State
         self.StateMachine.setState("TransitionState")
 
+        ## StateMachine Automator
+        self.nextstep_id = 0
+        self.state_On = True
+        self.state_Timer = 1000
+
         ## Initialize Tkinter and GUI_Manager
         self.tk = Tkinter.Tk()
         self.GUI_Manager = GUI_Manager2.GUI_Manager2(self.tk)
@@ -57,9 +62,9 @@ class GameState(Char):
     def tester_prompt(self):
         print("TEST")
 
-    ## TESTER: Execute state machine with each click
+    ## TESTER: Speed up timer with each click
     def click_Handler(self, event):
-        self.execute()
+        self.StateMachine_Forward()
 
     ## Display State Menu
     def display_StartMenu(self):
@@ -118,8 +123,8 @@ class GameState(Char):
         ## Display the gamescreen
         self.display_GameScreen()
 
-        ## Execute State Machine
-        self.execute()
+        ## Start State Machine
+        self.StateMachine_Start()
 
     ## Load Menu
     def display_LoadMenu(self):
@@ -158,7 +163,6 @@ class GameState(Char):
         self.GUI_Manager.loadChoice(load_topLevel, nameLabel, loadConfirm_Button, loadDelete_Button, loadCancel_Button)
 
     def loadConfirm_Handler(self, loadMenu_frame, name):
-        print("CONFIRM: " + str(name))
         ##Call UserFile_Handler to load data from name
         self.UserFile.loadFile(name)
 
@@ -172,11 +176,10 @@ class GameState(Char):
         ## Display the gamescreen
         self.display_GameScreen()
 
-        ## Execute State Machine
-        self.execute()
+        ## Start State Machine
+        self.StateMachine_Start()
 
     def loadDelete_Handler(self, loadMenu_frame, name):
-        print("DELETE: " + str(name))
         ##Call UserFile_Handler to delete file with specific name
         self.UserFile.deleteFile(name)
 
@@ -194,11 +197,14 @@ class GameState(Char):
         self.tk.bind("<Button-1>", self.click_Handler)
 
     ## DataFile_Handler call
-    def callDataFile_Handler(self):
+    def DataFile_getKey(self):
         line = self.DataFile.keyword_Handler()
-        self.DataFile.updateLine()
+        return line[0]
+
+    def DataFile_parseKey(self):
+        line = self.DataFile.keyword_Handler()
         options = {
-            ''      : lambda: None,
+            ''      : lambda: self.DataFile.updateLine(),
             "DSC"   : lambda: self.Keyword_DSC_Handler(line[1]),
             "NPC"   : lambda: self.Keyword_NPC_Handler(line[1]),
             "CHC"   : lambda: self.Keyword_CHC_Handler(self.choices, line[1], line[2]),
@@ -220,21 +226,22 @@ class GameState(Char):
     def Keyword_DSC_Handler(self, text):
         print("DSC")
         self.GUI_Manager.print_dialogue(text + '\n')
+        self.DataFile.updateLine()
 
     ## NPC Keyword Handler: Call GUI_Manager to print text
     def Keyword_NPC_Handler(self, text):
         print("NPC")
         self.GUI_Manager.print_dialogue(text + '\n')
+        self.DataFile.updateLine()
 
     ## CHC Keyword Handler: Store choice line number and string
     def Keyword_CHC_Handler(self, choices, line, text):
         print("CHC")
         choices.append(line)
         choices.append(text)
+        self.DataFile.updateLine()
 
     ## ENC Keyword Handler: Call GUI_Manager to configure buttons.
-    #                       Wait for user input
-    #                       Set transition to wait state
     def Keyword_ENC_Handler(self, choices):
         print("ENC")
         ## Create Choice Buttons
@@ -247,20 +254,22 @@ class GameState(Char):
         ## TESTER: Unbind Left Click Story Progress
         self.tk.unbind("<Button-1>")
 
+        ## Stop State Machine
+        self.StateMachine_Stop()
+
     ## Helper to CHC_Handler: Called when button1 is pressed
-    #                         Call GUI_Manager to print choices
-    #                         Call DataFile_Handler to jump to specific line
-    #                         Call Choice clear
     def Choice1_Handler(self, choice):
         self.GUI_Manager.print_dialogue(choice + '\n')
         self.DataFile.setLineNumber(int(self.choices[0]))
         self.Choice_Clear()
+        self.StateMachine_Start()
 
     ## Helper to CHC_Handler: Called when button2 is pressed
     def Choice2_Handler(self, choice):
         self.GUI_Manager.print_dialogue(choice + '\n')
         self.DataFile.setLineNumber(int(self.choices[2]))
         self.Choice_Clear()
+        self.StateMachine_Start()
 
     ## Helper to ENC_Handler: Clear choices, clear buttons
     def Choice_Clear(self):
@@ -276,12 +285,12 @@ class GameState(Char):
     ## SFX Keyword Handler: Call Sound_Manager to play sound effect
     def Keyword_SFX_Handler(self, text):
         print("SFX")
-        pass
+        self.DataFile.updateLine()
 
     ## MUS Keyword Handler: Call Sound_Manager to loop music
     def Keyword_MUS_Handler(self, text):
         print("MUS")
-        pass
+        self.DataFile.updateLine()
 
     ## BKG Keyword Handler: Call GUI_Manager to display background
     def Keyword_BKG_Handler(self, text):
@@ -294,6 +303,8 @@ class GameState(Char):
 
         ## Call GUI_Manager to print the background (image must be specific size)
         self.GUI_Manager.print_background(text)
+
+        self.DataFile.updateLine()
 
     ## LIK Keyword Handler: Call UserFile_Handler to update Likeability
     def Keyword_LIK_Handler(self, likeability):
@@ -309,6 +320,8 @@ class GameState(Char):
 
         ## Update likeability in UserFile
         self.UserFile.setLike(currentLike)
+
+        self.DataFile.updateLine()
     
     ## JMP Keyword Handler: Call DataFile_Handler to jump to specific line in file
     def Keyword_JMP_Handler(self, line):
@@ -335,13 +348,28 @@ class GameState(Char):
     def Keyword_BRN_Handler(self, changeInValue):
         print("BRN")
         self.DataFile.updateNextAct(int(changeInValue))
+        self.DataFile.updateLine()
 
-    def StateMachine_Read_Handler(self):
-        pass
-    def StateMachine_Wait_Handler(self):
-        pass
-    def StateMachine_Transition_Handler(self):
-        pass
+    def StateMachine_Start(self):
+        print("State machine started")
+        self.state_On = True
+        self.state_Timer = 1000
+        def step():
+            while self.state_On:
+                self.execute()
+                self.nextstep_id = self.tk.after(self.state_Timer, nextstep)
+                yield
+        nextstep = step().next
+        self.nextstep_id = self.tk.after(self.state_Timer, nextstep)
+
+    def StateMachine_Stop(self):
+        print("State machine stopped")
+        self.tk.after_cancel(self.nextstep_id)
+        self.state_On = False
+
+    def StateMachine_Forward(self):
+        print("State machine forward")
+        self.state_Timer = 1
 
 if __name__ == '__main__':
     game = GameState()
