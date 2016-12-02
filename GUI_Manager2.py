@@ -15,6 +15,7 @@ class GUI_Manager2:
         self.root = master                                  #Save tk object to loal var 
         self.mainFrameHeight = 600
         self.mainFrameWidth = 1000
+        master.maxsize(height = 600,width = 1200)
 
         ## Start Menu Frame
         self.start_frame = Frame(self.main_frame)
@@ -37,7 +38,7 @@ class GUI_Manager2:
         ## Main frame
         master.resizable(width = False, height = False)     #Make window not resizable 
         self.main_frame.pack()                              #Pack the main frame into place
-        self.main_frame.config(height = 600, width = 1000)  #Set the height and width of the main frame
+        self.main_frame.config( height = 600, width = 1000)  #Set the height and width of the main frame
         self.main_frame.config(relief = RIDGE)              #Style the border
         self.main_frame.config(padding = (15, 15))          #Add padding to main frame
         
@@ -81,10 +82,10 @@ class GUI_Manager2:
         #soundplayer.updateMusic(placeholder)               #play music on screen
     
     ## Display the game menu
-    def gameScreen(self, optionButton):
+    def gameScreen(self):
         ## Game Frame Configuration
-        self.game_frame.config(height = self.mainFrameHeight, width = self.mainFrameWidth)
-
+        self.game_frame.config(background = 'black', height = self.mainFrameHeight, width = self.mainFrameWidth)
+        
         ## Set Font
         buttonFont = tkFont.Font(size = 15)
 
@@ -106,8 +107,8 @@ class GUI_Manager2:
         self.user_frame.config(relief = RIDGE)  
         
         ## Option Button Configuration
-        optionButton.config(text = "Option", font = buttonFont)
-        optionButton.place(relx = 0.95, rely = 0.95)                                                        #Style the border
+        #optionButton.config(text = "Option", font = buttonFont)
+        #optionButton.place(relx = 0.95, rely = 0.95)                                                        #Style the border
 
         self.game_frame.pack()
 
@@ -210,8 +211,9 @@ class GUI_Manager2:
 
     ## Print the background
     def print_background(self, background):
+        self.bkg_canvas.pack_forget()
         self.bkg_canvas = Canvas(self.bkg_frame, width = 450, height = 500)      #Set canvas for background
-        self.bkg_canvas.pack(expand = YES, fill = BOTH, side = LEFT)        #Pack canvas     
+        self.bkg_canvas.pack(expand = YES, fill = BOTH,side =LEFT)        #Pack canvas     
         self.bkg = PhotoImage(file = background)                            #Set background file
         self.bkg_canvas.create_image(0,0, image = self.bkg, anchor = NW)    #Place background on the canvas
         

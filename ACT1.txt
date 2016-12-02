@@ -1,9 +1,9 @@
-MUS_ **Backgrond music filepath**
+MUS_ Desolation.mp3
 DSC_ ACT 1
 BKG_ cabin1.gif
-SFX_ **Static soundbyte filepath**
+SFX_ static.wav
 NPC_ Hello, can anyone--
-SFX_ **Static soundbyte filepath**
+SFX_ static.wav
 NPC_ Anyone? Please, respond if you can here me...
 CHC_11_ Who's this?
 CHC_11_ Calm down, I'm here.
@@ -38,7 +38,7 @@ BRN_0
 JMP_40
 BRN_1
 NPC_ That is beyond not funny!
-SFX_ **static sound clip file path**
+SFX_ static.wav
 NPC_ I was making the nightly rounds, checking cabins.
 NPC_ I noticed Sequoia Cabins door was opened. When I looked closer...
 NPC_ The hinges were busted. I looked inside and everyone was gone.
@@ -48,7 +48,7 @@ ENC_
 NPC_ He's gone, too. I'm telling you. Every. One. Is. Gone.
 NPC_ No, it's... This place feels... empty...
 DSC_ Slow, deep breathing comes through the radio.
-SFX_ **static sound clip file path**
+SFX_ static.wav
 NPC_ The radio static. It makes it worse. It's creepy.
 CHC_56_ Like Twilight Zone creepy?
 CHC_58_ Like something lurking in the woods?
@@ -64,7 +64,7 @@ CHC_65_ My agenda for the night isn't exactly chocked full of meetings.
 ENC_
 NPC_ You didn't have to help me, but you did. 
 NPC_ That shows kindness and I...
-SFX_ **Static sound**
+SFX_ static.wav
 NPC_ I think I heard something just outside the cabin!
 NPC_ I can't see anything... What was that?
 CHC_73_ Probably just the wind.

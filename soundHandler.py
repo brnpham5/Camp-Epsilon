@@ -14,10 +14,9 @@ class soundHandler():
     def updateMusic(self,musicFile): 
         if(mixer.music.get_busy()):     #check to see if music is already playing.
             mixer.music.stop()          #if so stop music.
-        music = "Sound Files/" + musicFile #Set file location to var
-        musicfile = music
-        if(music != "Sound Files/"):
-            mixer.music.load(music)        #Load music file
+        musicfile = musicFile
+        if(musicFile != ""):
+            mixer.music.load(musicFile)        #Load music file
             mixer.music.play(-1,0.0)       #Play music file. Optons below
         #Current option is infinite loop
         #Options we can do (loops,start time)
@@ -27,10 +26,10 @@ class soundHandler():
     #Used to play sound effects
     #soundFile is name of sound effect file
     def playSound(self,soundFile):
-        sound = 'Sound Files/' + soundFile #Set file location to var
-        se = mixer.Sound(sound)            #Create sound object to play sound 
+        se = mixer.Sound(soundFile)            #Create sound object to play sound 
         if(self.sfx):
-            se.play(0)                         #Play sounds. Options below mthod
+            print ("playing " + soundFile)
+            se.play(0,1900)                         #Play sounds. Options below mthod
         #Current option is now no loops
         #Optons we can do (loops,maxtime,fade_ms)
         #loops = 0 for 1 time, add 1 for each loop. use -1 for infinite

@@ -4,6 +4,7 @@ import UserFile_Handler
 import Tkinter
 import GUI_Manager2
 import pygame
+import soundHandler
 
 from time import clock
 
@@ -18,6 +19,7 @@ class GameState(Char):
         self.StateMachine = StateMachine.StateMachine(self, self)
         self.DataFile = DataFile_Handler.DataFile_Handler("ACT1.txt")
         self.UserFile = UserFile_Handler.UserFile_Handler()
+        self.soundPlayer = soundHandler.soundHandler()
 
         ## Game Data
         self.choices = []               # List of choices
@@ -190,10 +192,10 @@ class GameState(Char):
         self.optionOn = False
 
         ## Create Option Menu button
-        self.optionButton = Tkinter.Button(self.GUI_Manager.game_frame, command = lambda: self.OptionMenu_toggle())
+        ##self.optionButton = Tkinter.Button(self.GUI_Manager.game_frame, command = lambda: self.OptionMenu_toggle())
 
         ## Call GUI_Manager to display screen
-        self.GUI_Manager.gameScreen(self.optionButton)
+        self.GUI_Manager.gameScreen()
 
         ## TESTER: Click to progress game
         self.tk.bind("<Button-1>", self.click_Handler)
@@ -242,7 +244,8 @@ class GameState(Char):
             "JMP"   : lambda: self.Keyword_JMP_Handler(line[1]),
             "FIN"   : lambda: self.Keyword_FIN_Handler(line[1]),
             "BRN"   : lambda: self.Keyword_BRN_Handler(line[1]),
-            "ENC"   : lambda: self.Keyword_ENC_Handler(self.choices)
+            "ENC"   : lambda: self.Keyword_ENC_Handler(self.choices),
+            "PAU"   : lambda: self.Keyword_PAU_Handler()
         }
         
         options[line[0]]()
@@ -312,11 +315,13 @@ class GameState(Char):
     ## SFX Keyword Handler: Call Sound_Manager to play sound effect
     def Keyword_SFX_Handler(self, text):
         print("SFX")
+        self.soundPlayer.playSound(text.strip())
         self.DataFile.updateLine()
 
     ## MUS Keyword Handler: Call Sound_Manager to loop music
     def Keyword_MUS_Handler(self, text):
         print("MUS")
+        self.soundPlayer.updateMusic(text.strip())
         self.DataFile.updateLine()
 
     ## BKG Keyword Handler: Call GUI_Manager to display background
@@ -372,6 +377,9 @@ class GameState(Char):
         self.UserFile.saveFile()
 
         ## Stop Autorun
+        #self.StateMachine_Stop()
+
+    def Keyword_PAU_Handler(self):
         self.StateMachine_Stop()
 
     ## BRN Keyword Handler: Call DataFile_Handler to update branch variable: 0 = decrement, 1 = increment
