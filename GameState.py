@@ -76,7 +76,7 @@ class GameState(Char):
         self.GUI_Manager.start_frame.place(bordermode = Tkinter.OUTSIDE, height = self.GUI_Manager.mainFrameHeight, width = self.GUI_Manager.mainFrameWidth)
         
         ## Call GUI_Manager to display buttons
-        self.GUI_Manager.startMenu(title, buttonNewGame, buttonContinue, buttonExit)
+        self.GUI_Manager.startMenu(title, buttonNewGame, buttonContinue, buttonExit, "menu background.gif")
 
     ## Hide Start Menu
     def hide_StartMenu(self):
@@ -205,7 +205,6 @@ class GameState(Char):
         else:
             self.optionOn = False
             self.GUI_Manager.hide_optionMenu()
-            self.GUI_Manager.
 
 
     def OptionMenu_toggleMus(self):
@@ -371,6 +370,9 @@ class GameState(Char):
 
         ## Save UserFile
         self.UserFile.saveFile()
+
+        ## Stop Autorun
+        self.StateMachine_Stop()
 
     ## BRN Keyword Handler: Call DataFile_Handler to update branch variable: 0 = decrement, 1 = increment
     def Keyword_BRN_Handler(self, changeInValue):

@@ -13,6 +13,8 @@ class GUI_Manager2:
         ## Declarations
         self.main_frame = ttk.Frame(master)                 #Set main frame, the other three smaller frames will go inside the main frame
         self.root = master                                  #Save tk object to loal var 
+        self.mainFrameHeight = 600
+        self.mainFrameWidth = 1000
 
         ## Start Menu Frame
         self.start_frame = Frame(self.main_frame)
@@ -57,19 +59,24 @@ class GUI_Manager2:
         
         ## Title
         title.config(text = "Camp Epsilon", font = titleFont)
-        title.pack(bordermode = OUTSIDE, height = 90, width = 300, relx = 0.375, rely = .007)                           #set label in place and set dimensions
+        title.place(bordermode = OUTSIDE, height = 90, width = 300, relx = 0.375, rely = .007)                           #set label in place and set dimensions
+        title.lift()
 
         ## New Game Button
-        buttonNewGame.config(style = 'TButton', text = "New Game", cursor ='pirate')        #created button for start screen 
+        buttonNewGame.configure(text = "New Game", cursor ='pirate')        #created button for start screen 
         buttonNewGame.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .20)                     #Set button in place, set dimensions
+        buttonNewGame.lift()
 
+        #buttonNewGameWindow = self.bkg_canvas.create_window(window = buttonGame)
         ## Load Game Button
-        buttonContinue.config(style = 'TButton', text = "Continue Game", cursor ='pirate')     #create button for load screen
-        buttonContinue.place(bordermode = OUTSIDE, height = 0, width = 250, relx = 0.40, rely = .30)                      #set button in place, set dimensions
+        buttonContinue.configure(text = "Continue Game", cursor ='pirate')     #create button for load screen
+        buttonContinue.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .30)                      #set button in place, set dimensions
+        buttonContinue.lift()
 
         ## Exit Game Button
-        buttonExit.config(style = 'TButton', text = "Exit Game", cursor ='pirate')                                          #create button for game exit
+        buttonExit.configure(text = "Exit Game", cursor ='pirate')                                          #create button for game exit
         buttonExit.place(bordermode = OUTSIDE, height = 30, width = 250, relx = 0.40, rely = .40)                      #set button in place, set dimensions 
+        buttonExit.lift()
 
         #soundplayer.updateMusic(placeholder)               #play music on screen
     
@@ -122,11 +129,11 @@ class GUI_Manager2:
         entryBox.place(relx = 0.42, rely = 0.45)                                      #place entry in frame
 
         ## Confirm button
-        buttonConfirm.config(style = 'TButton', text = "Ok", cursor = 'pirate')                   #create button for player
+        buttonConfirm.config(text = "Ok", cursor = 'pirate')                   #create button for player
         buttonConfirm.place(relx = 0.42, rely = 0.5)                                    #Set buttons
 
         ## Return button
-        buttonReturn.config(tyle = 'TButton', text = "Return to Menu", cursor = 'pirate')    #create button for returning to start screen
+        buttonReturn.config(text = "Return to Menu", cursor = 'pirate')    #create button for returning to start screen
         buttonReturn.place(relx = 0.48, rely = 0.5)                                 #place button to popup window
 
         entry_frame.pack()
@@ -164,15 +171,15 @@ class GUI_Manager2:
         nameLabel.place(relx = 0.25, rely = 0.35)
 
         ## Display Confirm Button
-        loadConfirm_Button.config(style = 'TButton', text = "Confirm")
+        loadConfirm_Button.config(text = "Confirm")
         loadConfirm_Button.place(relx = 0.1, rely = 0.5) 
 
         ## Display Delete Button
-        loadDelete_Button.config(style = 'TButton', text = "Delete")
+        loadDelete_Button.config(text = "Delete")
         loadDelete_Button.place(relx = 0.40, rely = 0.5)
 
         ## Display Cancel Button
-        loadCancel_Button.config(style = 'TButton', text = "Cancel")
+        loadCancel_Button.config(text = "Cancel")
         loadCancel_Button.place(relx = 0.70, rely = 0.5)
 
     def optionMenu(self):
