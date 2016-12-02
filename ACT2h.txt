@@ -1,0 +1,131 @@
+MUS_ **Background music filepath**
+DSC_ACT 2 
+BKG_**Background image fielpath**
+SFX_**Static soundbyte fielpath**
+CHC_8_What are you talking about
+CHC_8_Who is following you
+ENC_
+NPC_I don’t know.
+NPC_But i have a strong feeling that something is going wrong over here
+DCS_*jordan pause for a minute  *
+CHC_14_Are you there?
+CHC_14_Hey, where are you lost?
+ENC_
+NPC_Oh, I am sorry
+NPC_I am just lost in thoughts.
+NPC_Ok tell me now what should I do?
+NPC_Should I go into the woods and see the what happens or I should go and check communication cabin to see flashlights.
+CHC_82_ go to sequio cabin 
+CHC_21_go to communication cabin
+ENC_
+DSC_In the communication cabin
+NPC_Oh man, It is so dark over here.
+NPC_Ok so let me see if I could find a flashlight over here.
+NPC_ HELP.......
+DSC_*jordan shout*
+CHC_29_why you shout
+CHC_29_what happen?
+ENC_
+NPC_I saw something. I don’t know what it was.
+NPC_There is a window in cabin.
+NPC_I feel..  Like… a shadow.
+NPC_Oh god, what is happening with me.
+NPC_I have to find a student's too.
+NPC_Hey , I am really depressed.
+NPC_I am getting scared now.
+CHC_39_cool, man
+CHC_39_be brave in this situation
+ENC_
+NPC_Yeah, i know, I have too
+NPC_Ok so let me see if i could find something over here.
+DCS_**Jordan searches a cabin.**
+NPC_Ok so there is good news and bad news.
+NPC_Bad news first.
+NPC_there is a phone.
+NPC_But it is dead.
+NPC_there is a computer too, but unfortunately not working.
+NPC_Now time for a good news
+NPC_I found a small flashlight.
+CHC_52_good, now what are you waiting for
+CHC_52_look for the students
+ENC_
+NPC_You are right.
+NPC_Let me see if i could some clue.
+NPC_Wait …. I heard someone’s footstep.
+NPC_It might be some students
+NPC_Let me go and check outside.
+CHC_68_yeah check outside you might get some help.//****** LOOK FOR LINE
+CHC_60_No, just hide in the room.
+ENC_
+NPC_I think you are right.
+NPC_Probably it is danger outside.
+NPC_Ok. i guess the person is gone.
+NPC_It is quiet again.
+NPC_what's going on?
+CHC_75_what?
+CHC_75_what happened
+ENC_
+NPC_What, there is no one outside.
+NPC_But i have heard footsteps.
+NPC_so i guess let me go back inside 
+NPC_whats going on over here
+CHC_75_what?
+CHC_75_what happened
+ENC_
+NPC_The  bulb is flickering. 
+NPC_How come the computer start working.
+NPC_Blood…. Blood ...help…
+NPC_Help…
+CHC_129_Are you alright
+CHC_129_what happen
+ENC_
+NPC_ok let me go there
+NPC_no let me go woods first
+NPC_probaby i find someone there
+NPC_Ok, but i am scared.
+NPC_Thank you for being with me, otherwise i would have died with fear.
+CHC_don’t let fear to win 
+CHC_No worries, I will help you as I can
+ENC_
+NPC_ absolutely, fear is person's biggest enemy
+NPC_Hey you did not tell me your name.
+NPC_Who are you and why are you helping me
+CHC_96_None of your business
+CHC_96_right now, you better focus on yourself
+ENC_
+NPC_Ok, don’t get mad.
+NPC_Wait.. someone called me.
+NPC_I heard some one is calling my name.
+CHC_102_It could be your students
+CHC_102_Are your sure someone called you
+ENC_
+NPC_Iam not sure.
+NPC_But, i have a strong feeling  that someone is following me
+NPC_I don’t know if this is my student or some stranger.
+NPC_I hope I could find a some clue about my students.
+DSC_* NPC heard that some one ‘s footstep*
+NPC_I am hearing someone’s footstep.
+NPC_But if i look back, there is no one.
+CHC_112_it might some animal
+CHC_112_it might be some ghost
+ENC_
+NPC_Don’t scared me.
+NPC_I always watch in the movies, the long trees,dark in the wood.
+NPC_But never thought one day i have this feeling.
+NPC_These long trees never got scared like this today.
+NPC_How long i have to keep walking.
+CHC_120_just walk little bit
+CHC_120_you will get some clue
+ENC_
+NPC_Ok , i am trusting you.
+DSC_**After walking a little longer, NPC shout again**
+NPC_What did i just saw.
+NPC_Mike, rosy,
+NPC_Blood…...Blood… Help….
+NPC_Help
+CHC_Are you alright
+CHC_ what happen
+ENC_
+NPC_ Everything is gone.
+ENA_2h
+

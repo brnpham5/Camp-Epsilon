@@ -192,37 +192,46 @@ class GameState(Char):
         self.optionOn = False
 
         ## Create Option Menu button
-        ##self.optionButton = Tkinter.Button(self.GUI_Manager.game_frame, command = lambda: self.OptionMenu_toggle())
+        self.optionButton = Tkinter.Button(self.GUI_Manager.game_frame, command = lambda: self.OptionMenu())
 
         ## Call GUI_Manager to display screen
-        self.GUI_Manager.gameScreen()
+        self.GUI_Manager.gameScreen(self.optionButton)
 
         ## TESTER: Click to progress game
         self.tk.bind("<Button-1>", self.click_Handler)
 
-    def OptionMenu_toggle(self):
-        if(self.optionOn) == False:
-            self.optionOn = True
-            self.GUI_Manager.display_optionMenu()
-        else:
-            self.optionOn = False
-            self.GUI_Manager.hide_optionMenu()
+    def OptionMenu(self):
+        ##Create popup window that holds options for the game
+        self.options = Tkinter.Toplevel(self.GUI_Manager.game_frame ,height = 250, width = 300)
+        self.options.title("Option Menu")
 
+        ##Create button to enable/disable music and pack it to option window
+        toggleMUS = Tkinter.Button(self.options, text = "Enable/Disable Music", command = (lambda:self.soundPlayer.toggleMusic()))
+        toggleMUS.pack()
 
-    def OptionMenu_toggleMus(self):
-        pass
+        ##Create button to enable/disable sound effects and pack it to option window
+        toggleSE = Tkinter.Button(self.options, text = "Enable/Disable Sound Effects", command = (lambda:self.soundPlayer.toggleSFX()))
+        toggleSE.pack()
 
-    def OptionMenu_toggleSFX(self):
-        pass
+        ##Create button to close option menu window and pack it to option window
+        closeOptions = Tkinter.Button(self.options, text = "Return to Game", command = (lambda:self.options.destroy()))
+        closeOptions.pack()
 
-    def OptionMenu_close(self):
-        pass
-        
+        ##Create button to return to start screen from game scree
+        #startMenu = Tkinter.Button(self.options, text = "Return to Menu", command = (lambda:self.OptionMenu_returnToStart()))
+        #startMenu.pack()
+
+    ##Switches game screen to start screen
+    ##Bugs:
+        ##Start screen gets wider, background img is replaced by default color after the user returns to start on 2nd time
+        ##Datafile remains at last read line.
+        ##If user returned to start screen while choices are present, choices remain and new choices are placed under old
     def OptionMenu_returnToStart(self):
-        pass
-
-    def hide_OptionMenu(self):
-        pass
+        self.GUI_Manager.game_frame.pack_forget()
+        self.options.destroy()
+        self.StateMachine_Stop()
+        self.soundPlayer.stopSounds()
+        self.display_StartMenu()
 
 
     ## DataFile_Handler call

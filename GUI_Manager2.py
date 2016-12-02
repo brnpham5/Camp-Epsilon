@@ -7,7 +7,6 @@ import ttk
 
 class GUI_Manager2:
     ##soundPlayer = soundHandler()    #object for soundHandler. used to play music and sound effects
-    y = 50  #y coordinate to place text on canvas
 
     def __init__(self, master = None):
         ## Declarations
@@ -82,7 +81,7 @@ class GUI_Manager2:
         #soundplayer.updateMusic(placeholder)               #play music on screen
     
     ## Display the game menu
-    def gameScreen(self):
+    def gameScreen(self,optionButton):
         ## Game Frame Configuration
         self.game_frame.config(background = 'black', height = self.mainFrameHeight, width = self.mainFrameWidth)
         
@@ -107,8 +106,8 @@ class GUI_Manager2:
         self.user_frame.config(relief = RIDGE)  
         
         ## Option Button Configuration
-        #optionButton.config(text = "Option", font = buttonFont)
-        #optionButton.place(relx = 0.95, rely = 0.95)                                                        #Style the border
+        optionButton.config(text = "Option", font = buttonFont)
+        optionButton.place(relx = 0.70, rely = 0.95)                                                        #Style the border
 
         self.game_frame.pack()
 

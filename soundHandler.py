@@ -1,4 +1,4 @@
-#Version 2.1
+#Version 2.2
 from pygame import mixer    #Module needed for sound playing
 
 class soundHandler():
@@ -14,7 +14,7 @@ class soundHandler():
     def updateMusic(self,musicFile): 
         if(mixer.music.get_busy()):     #check to see if music is already playing.
             mixer.music.stop()          #if so stop music.
-        musicfile = musicFile
+        self.musicfile = musicFile
         if(musicFile != ""):
             mixer.music.load(musicFile)        #Load music file
             mixer.music.play(-1,0.0)       #Play music file. Optons below
@@ -37,9 +37,9 @@ class soundHandler():
         #fade_ms = sound starts at no volume then builds up to max. use number to change
 
     #Used to stop audio when program ends
-    def endHandler(self):
+    def stopSounds(self):
         mixer.stop()    #stop all playback
-        mixer.quit()    #ends all playback
+        mixer.music.stop()
 
     #Used when music is toggled off and on in options
     def toggleMusic(self):
@@ -50,13 +50,16 @@ class soundHandler():
             self.music = False               #set flag to false
         else:
             mixer.music.set_volume(1.0) #set music volume to 1.0(max volume)
+            print self.musicfile
             if(self.musicfile != ""):
                 mixer.music.load(self.musicfile) #load music file again for volume to change
+                mixer.music.play(-1,0.0)
             self.music = True                #set flag to true
 
     #Used when sfx is toggled on or off in options
     def toggleSFX(self):
         if(self.sfx):
+            mixer.stop()
             self.sfx = False #Turn flag to false
         else:
             self.sfx = True  #Turn flag to true
