@@ -34,8 +34,8 @@ class TransitionState(State):
 
     def execute(self):
         ##Call GameState.DataFile_Handler to open the sent DataFile name, set transition to ReadState
+        print("TransitionState")
         self.StateMachine.toTransition("toReadState")
-        pass
         
     def exit(self):
         pass
@@ -48,8 +48,9 @@ class ReadState(State):
         pass
 
     def execute(self):
+        print("ReadState")
         ## Call GameState to parse and execute keyword
-        keyword = self.StateMachine.GameState.callDataFile_Handler()
+        keyword = self.StateMachine.GameState.DataFile_parseKey()
         ##Depending on the returned value, set transition to:
             ##On ENC, WaitState
             ##On FIN, TransitionState
@@ -69,13 +70,13 @@ class WaitState(State):
         super(WaitState, self).__init__(StateMachine)
 
     def enter(self):
-        print("Wait State")
+        #self.StateMachine.GameState.StateMachine_Stop()
         pass
 
     def execute(self):
+        print("Wait State")
         ##Wait for user choice, print user choice, clear buttons, set line number to appropriate position
         self.StateMachine.toTransition("toReadState")
-        pass
         
     def exit(self):
         pass
