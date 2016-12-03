@@ -29,8 +29,6 @@ hank.gif from csprofessorhank on Twitter
 
 menu background.gif from MLP Camping Background by Scootaloo24 on deviantart
 
-button.gif from ?
-
 Desolation.mp3 from http://www.purple-planet.com
 
 static.wav from ?
